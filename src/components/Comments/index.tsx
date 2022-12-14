@@ -1,5 +1,7 @@
 import React from 'react';
 
+import EditableComments from '@/components/EditableComments';
+
 const fetchComments = () =>
   new Promise<string[]>((resolve) => {
     setTimeout(() => {
@@ -12,11 +14,7 @@ const Comments = async () => {
 
   return (
     <div>
-      <ul>
-        {comments.map((comment) => (
-          <li key={comment}>{comment}</li>
-        ))}
-      </ul>
+      <EditableComments comments={comments} />
     </div>
   );
 };
