@@ -1,0 +1,10 @@
+.imagesListContainer {
+  display: grid;
+  grid-template-columns: 250px 250px 250px;
+  grid-template-rows: 160px;
+  grid-gap: 1rem;
+}
+.imagesListContainer > div {
+  position: relative;
+  border: 3px dotted orange;
+}
