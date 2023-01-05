@@ -22,6 +22,9 @@ const AppBar = ({}: IProps): JSX.Element => {
       <Link className="text-sky-600 hover:text-sky-700" href={'/admin/panel'}>
         Panel
       </Link>
+      <Link className="text-sky-600 hover:text-sky-700" href={'/dashboard'}>
+        Dashboard
+      </Link>
       <div className="ml-auto flex gap-2">
         {session?.user ? (
           <>
