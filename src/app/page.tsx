@@ -1,32 +1,17 @@
-import { Suspense } from 'react';
+import React from 'react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
-import Comments from '@/components/Comments';
-import classes from './page.module.css';
+interface IPageProps {
+  [x: string]: any;
+}
 
-const fetchDescription = () =>
-  new Promise<string>((resolve) => {
-    setTimeout(() => {
-      resolve('Product information ready for SEO');
-    }, 100);
-  });
-
-const Home = async () => {
-  const description = await fetchDescription();
-
+const Homepage: NextPage<IPageProps> = ({}) => {
   return (
-    <div className={classes.container}>
-      <header className={classes.header}>header</header>
-      <main className={classes.main}>
-        <h2>Product description</h2>
-        <p>{description}</p>
-        <Suspense fallback={<div>Loading...</div>}>
-          {/* @ts-expect-error Async Server Component */}
-          <Comments />
-        </Suspense>
-      </main>
-      <footer className={classes.footer}>footer</footer>
-    </div>
+    <main>
+      <h1>Next.JS v13</h1>
+    </main>
   );
 };
 
-export default Home;
+export default Homepage;
