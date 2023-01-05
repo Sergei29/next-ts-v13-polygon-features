@@ -7,11 +7,9 @@ interface IPageProps {
 
 const Homepage: NextPage<IPageProps> = ({}) => {
   return (
-    <main>
-      <h1 className="text-3xl font-bold underline">
-        This is the Home page - everyone can access it.
-      </h1>
-    </main>
+    <h1 className="flex justify-center items-center p-5 text-green-500 text-lg font-bold">
+      This is the Home page - everyone can access it.
+    </h1>
   );
 };
 
