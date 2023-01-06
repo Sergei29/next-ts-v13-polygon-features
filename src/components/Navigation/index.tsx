@@ -3,7 +3,10 @@
 import React from "react";
 import Link from "next/link";
 
-const navLinks = [{ id: 1, path: "/", name: "Homepage" }];
+const navLinks = [
+  { id: 1, path: "/", name: "Homepage" },
+  { id: 2, path: "/ships", name: "Ships" },
+];
 
 const Navigation = (): JSX.Element => {
   return (

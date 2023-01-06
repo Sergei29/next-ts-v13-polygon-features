@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
+  images: {
+    domains: ["i.imgur.com", "imgur.com", , "photos.marinetraffic.com"],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
