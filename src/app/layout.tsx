@@ -1,3 +1,8 @@
+'use client';
+
+import { ApolloProvider } from '@apollo/client';
+
+import { client } from '@/graphql/client';
 import './globals.css';
 
 type Props = {
@@ -12,7 +17,9 @@ export default function RootLayout({ children }: Props) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body>
+        <ApolloProvider client={client}>{children}</ApolloProvider>
+      </body>
     </html>
   );
 }

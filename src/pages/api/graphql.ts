@@ -3,14 +3,7 @@ import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { gql } from 'graphql-tag';
 import { NextApiRequest } from 'next';
 
-const books = [
-  {
-    id: '1',
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  { id: '2', title: 'City of Glass', author: 'Paul Auster' },
-];
+import { books } from '@/constants';
 
 const getLoggedInUserJwt = async (req: NextApiRequest) => {
   const jwt = req.cookies['jwt'];
