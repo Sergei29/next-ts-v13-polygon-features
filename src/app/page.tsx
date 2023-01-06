@@ -1,15 +1,19 @@
 import React from 'react';
-import type { NextPage } from 'next';
 
-interface IPageProps {
-  [x: string]: any;
-}
+import ImageList from '@/components/ImageList';
+import Posts from '@/components/Posts';
+import { getData } from '@/utils';
 
-const Homepage: NextPage<IPageProps> = ({}) => {
+const Homepage = async () => {
+  const { data } = await getData<{ name: string }>(`${process.env.NEXT_PUBLIC_APP_URL}/api/hello`);
+
   return (
-    <main>
+    <>
       <h1 className="text-3xl font-bold underline">Next.JS v13</h1>
-    </main>
+      {data && <h4 className="text-xl font-bold underline text-right">{data.name}</h4>}
+      {/* <Posts /> */}
+      <ImageList />
+    </>
   );
 };
 
