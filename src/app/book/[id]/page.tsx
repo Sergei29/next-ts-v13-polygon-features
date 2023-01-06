@@ -1,44 +1,34 @@
-import React from 'react';
+'use client';
 
-import { client, GET_BOOK_BY_ID, GET_BOOKS } from '@/graphql/client';
+import React from 'react';
+import { useQuery } from '@apollo/client';
+
+import { GET_BOOK_BY_ID } from '@/graphql/client';
 import { Book } from '@/types';
 
-export async function generateStaticParams() {
-  const { data } = await client.query<{ books: Book[] }>({
-    query: GET_BOOKS,
-  });
+type Props = {
+  params: { id: string };
+} & Record<string, any>;
 
-  return data.books.map((book) => ({
-    id: book.id,
-  }));
-}
-
-type PageProps = {
-  params: Record<string, string>;
-};
-
-const BookPage = async ({ params }: PageProps) => {
-  const { id } = params;
-
-  const { data, error } = await client.query<{ book: Book }>({
-    query: GET_BOOK_BY_ID,
-    variables: { id },
+const BookPage = ({ params }: Props) => {
+  const { data, error, loading } = useQuery<{ book: Book }>(GET_BOOK_BY_ID, {
+    variables: { id: params.id },
   });
 
   return (
     <div>
       <h2> Book Page</h2>
-      <p>ID: {id}</p>
+      <p>ID: </p>
       <div>
-        {data?.book ? (
+        {data?.book && (
           <>
             <h4>{data.book.title}</h4>
             <p>By {data.book.author}</p>
           </>
-        ) : (
-          <p className="text-red-600 font-bold">Book not found</p>
         )}
+        {loading && <h4>Loading...</h4>}
         {error && <p className="text-red-600 font-bold">{error.message}</p>}
+        {!!data && !data.book && <p className="text-red-600 font-bold">Book not found</p>}
       </div>
     </div>
   );
