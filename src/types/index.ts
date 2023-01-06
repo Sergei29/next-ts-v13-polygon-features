@@ -3,3 +3,5 @@ export type Book = {
   title: string;
   author: string;
 };
+
+export type NewBookInput = Pick<Book, 'title' | 'author'>;

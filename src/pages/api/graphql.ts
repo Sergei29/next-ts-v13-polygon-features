@@ -3,7 +3,8 @@ import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { gql } from 'graphql-tag';
 import { NextApiRequest } from 'next';
 
-import { books } from '@/constants';
+import { Book } from '@/types';
+import { db } from '@/db';
 
 const getLoggedInUserJwt = async (req: NextApiRequest) => {
   const jwt = req.cookies['jwt'];
@@ -12,8 +13,12 @@ const getLoggedInUserJwt = async (req: NextApiRequest) => {
 
 const resolvers = {
   Query: {
-    books: () => books,
+    books: async () => {
+      const books = await db.getData('/books');
+      return books;
+    },
     book: async (_: any, args: any, ctx: any, info: any) => {
+      const books: Book[] = await db.getData('/books');
       return books.find((curent) => curent.id === args.id);
     },
   },
