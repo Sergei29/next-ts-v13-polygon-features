@@ -5,11 +5,11 @@ import ShipSummaryItem from "./ShipSummaryItem";
 
 type Props = {
   ships?: ShipSummary[];
-  loading: boolean;
+  loading?: boolean;
   error?: string;
 };
 
-const ShipsList = ({ ships, loading, error }: Props): JSX.Element => {
+const ShipsList = ({ ships, loading = false, error }: Props): JSX.Element => {
   if (loading) {
     return <h4 className="text-red-600 font-bold text-center">Loading...</h4>;
   }
