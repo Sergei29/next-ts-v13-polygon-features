@@ -4,9 +4,9 @@ import Image from "next/image";
 import { ShipDetails } from "@/types";
 
 type Props = {
-  shipDetails?: ShipDetails;
+  shipDetails?: ShipDetails | null;
   loading?: boolean;
-  error?: string;
+  error?: string | null;
 };
 
 const ShipParticulars = ({
