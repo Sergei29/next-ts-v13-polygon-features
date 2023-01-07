@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
+import FavShipButton from "@/components/FavShipButton";
 import { ShipDetails } from "@/types";
 
 type Props = {
@@ -36,6 +37,7 @@ const ShipParticulars = ({
     model,
     missions,
     roles,
+    isFavorite,
   } = shipDetails;
   return (
     <div className="w-1/2 mx-auto">
@@ -53,7 +55,8 @@ const ShipParticulars = ({
         </div>
       )}
       <h3 className="my-2 text-xl font-bold text-blue-900">
-        {name}{" "}
+        {name}
+
         {url && (
           <a
             href={url}
@@ -65,6 +68,7 @@ const ShipParticulars = ({
           </a>
         )}
       </h3>
+      <FavShipButton id={id} isFavorite={isFavorite} />
       <p>Year built: {year_built ?? "no info"}</p>
       <p>Model: {model ?? "no info"}</p>
       <p>{active ? "In service" : "Decomissioned"}</p>

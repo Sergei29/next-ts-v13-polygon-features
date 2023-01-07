@@ -5,7 +5,10 @@ import Link from "next/link";
 import { ShipSummary } from "@/types";
 
 type Props = {
-  shipSummary: Pick<ShipSummary, "id" | "image" | "name" | "home_port">;
+  shipSummary: Pick<
+    ShipSummary,
+    "id" | "image" | "name" | "home_port" | "isFavorite"
+  >;
 };
 
 const ShipSummaryItem = ({ shipSummary }: Props): JSX.Element => {

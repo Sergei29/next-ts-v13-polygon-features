@@ -19,10 +19,10 @@ const ShipsList = ({ ships, loading = false, error }: Props): JSX.Element => {
   return (
     <div className="flex flex-wrap justify-center gap-2">
       {!!ships?.length ? (
-        ships.map(({ id, image, home_port, name }) => (
+        ships.map(({ id, image, home_port, name, isFavorite }) => (
           <ShipSummaryItem
             key={id}
-            shipSummary={{ id, image, home_port, name }}
+            shipSummary={{ id, image, home_port, name, isFavorite }}
           />
         ))
       ) : (

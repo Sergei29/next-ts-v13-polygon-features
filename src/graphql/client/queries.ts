@@ -30,6 +30,7 @@ export const GET_SHIPS_LIST = gql`
 export const GET_SHIP_BY_ID = gql`
   query Ship($id: ID!) {
     ship(id: $id) {
+      isFavorite @client
       active
       id
       image

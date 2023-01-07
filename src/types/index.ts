@@ -8,6 +8,7 @@ export type LaunchNext = {
 
 export type ShipSummary = {
   id: string;
+  isFavorite?: boolean;
   active: boolean;
   image: string | null;
   name: string;
