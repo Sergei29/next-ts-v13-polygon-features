@@ -6,7 +6,7 @@ import ShipSummaryItem from "./ShipSummaryItem";
 type Props = {
   ships?: ShipSummary[];
   loading?: boolean;
-  error?: string;
+  error?: string | null;
 };
 
 const ShipsList = ({ ships, loading = false, error }: Props): JSX.Element => {

@@ -1,18 +1,30 @@
-import type { NextPage } from "next";
+import type { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
-import { useQuery } from "@apollo/client";
 
 import ShipsList from "@/components/ShipsList";
-import { GET_SHIPS_LIST } from "@/graphql/client";
+import { GET_SHIPS_LIST, apolloClient } from "@/graphql/client";
 import { ShipSummary } from "@/types";
 
-type PageProps = {};
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const { data, error } = await apolloClient.query<{ ships: ShipSummary[] }>({
+    query: GET_SHIPS_LIST,
+  });
 
-const ShipsListPage: NextPage<PageProps> = ({}) => {
-  const { data, loading, error } = useQuery<{ ships: ShipSummary[] }>(
-    GET_SHIPS_LIST
-  );
+  return {
+    props: {
+      ships: data.ships,
+      error: error?.message || null,
+    },
+    revalidate: 600,
+  };
+};
 
+type PageProps = {
+  ships: ShipSummary[];
+  error: string | null;
+};
+
+const ShipsListPage: NextPage<PageProps> = ({ ships, error }) => {
   return (
     <>
       <Head>
@@ -22,11 +34,7 @@ const ShipsListPage: NextPage<PageProps> = ({}) => {
 
       <>
         <h1 className="py-4 text-center">Ships List Page</h1>
-        <ShipsList
-          ships={data?.ships}
-          loading={loading}
-          error={error?.message}
-        />
+        <ShipsList ships={ships} error={error} />
       </>
     </>
   );

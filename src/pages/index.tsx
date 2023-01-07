@@ -22,6 +22,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
       nextLaunch: data.launchNext,
+      error: error?.message || null,
     },
     revalidate: 600,
   };
@@ -29,9 +30,10 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 type PageProps = {
   nextLaunch: LaunchNext;
+  error: string | null;
 };
 
-const HomePage: NextPage<PageProps> = ({ nextLaunch }) => {
+const HomePage: NextPage<PageProps> = ({ nextLaunch, error }) => {
   const { mission_name, launch_date_local, launch_site } = nextLaunch;
   const nextLaunchDate = fetchDate(launch_date_local).join("/");
 
@@ -46,17 +48,23 @@ const HomePage: NextPage<PageProps> = ({ nextLaunch }) => {
       <>
         <h1 className="text-lg underline px-9 my-9">Next Launch</h1>
 
-        <div className="flex flex-col gap-2">
-          <span>
-            🚀 Mission name: <strong>{mission_name}</strong>
-          </span>
-          <span>
-            📅 Date: <strong>{nextLaunchDate}</strong>
-          </span>
-          <span>
-            🏠 Launched from: <strong>{launch_site.site_name_long}</strong>
-          </span>
-        </div>
+        {!error ? (
+          <div className="flex flex-col gap-2">
+            <span>
+              🚀 Mission name: <strong>{mission_name}</strong>
+            </span>
+            <span>
+              📅 Date: <strong>{nextLaunchDate}</strong>
+            </span>
+            <span>
+              🏠 Launched from: <strong>{launch_site.site_name_long}</strong>
+            </span>
+          </div>
+        ) : (
+          <h4 className="text-red-600 text-center font-bold px-9 my-9">
+            {error}
+          </h4>
+        )}
       </>
     </>
   );
