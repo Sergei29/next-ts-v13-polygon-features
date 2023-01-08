@@ -1,11 +1,28 @@
-import type { NextPage } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 
-import { GET_SHIP_BY_ID } from "@/graphql/client";
+import {
+  GET_SHIP_BY_ID,
+  initialiseApolloClient,
+  addApolloState,
+} from "@/graphql/client";
 import ShipParticulars from "@/components/ShipParticulars";
 import { ShipDetails } from "@/types";
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const shipId = ctx.params?.id as string;
+  const apolloClient = initialiseApolloClient();
+  await apolloClient.query<{ ships: ShipDetails[] }>({
+    query: GET_SHIP_BY_ID,
+    variables: { id: shipId },
+  });
+
+  return addApolloState(apolloClient, {
+    props: {},
+  });
+};
 
 type PageProps = {};
 
