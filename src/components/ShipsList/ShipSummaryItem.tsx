@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import FavShipButton from "@/components/FavShipButton";
 import { ShipSummary } from "@/types";
 
 type Props = {
@@ -12,7 +13,7 @@ type Props = {
 };
 
 const ShipSummaryItem = ({ shipSummary }: Props): JSX.Element => {
-  const { id, image, name, home_port } = shipSummary;
+  const { id, image, name, home_port, isFavorite } = shipSummary;
 
   return (
     <Link href={`/ships/${id}`} className="bg-slate-300 p-1 rounded-sm w-1/5">
@@ -29,7 +30,10 @@ const ShipSummaryItem = ({ shipSummary }: Props): JSX.Element => {
           <span>no image</span>
         </div>
       )}
-      <h4>{name}</h4>
+      <h4>
+        {name} {isFavorite && <span className="ml-2 text-sm">✨</span>}
+      </h4>
+      <FavShipButton id={id} isFavorite={isFavorite} />
       <p>Home port:{home_port} </p>
     </Link>
   );

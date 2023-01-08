@@ -6,8 +6,10 @@ export const cacheConfig: InMemoryCacheConfig = {
     Ship: {
       fields: {
         isFavorite: {
-          read: (_, { variables }) =>
-            variables?.id ? favoriteShipsVar().includes(variables.id) : false,
+          read: (_, { variables, readField }) => {
+            const shipId = readField("id") as string;
+            return favoriteShipsVar().includes(shipId);
+          },
         },
       },
     },

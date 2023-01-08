@@ -15,6 +15,7 @@ export const GET_NEXT_LAUNCH = gql`
 export const GET_SHIPS_LIST = gql`
   query Ships {
     ships {
+      isFavorite @client
       active
       id
       image
