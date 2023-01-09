@@ -11,7 +11,13 @@ export const resolvers = {
             description: true,
             image: true,
             author: {
-              select: { id: true, createdAt: true, name: true, about: true },
+              select: {
+                id: true,
+                createdAt: true,
+                name: true,
+                about: true,
+                books: true,
+              },
             },
             createdAt: true,
           },
@@ -30,6 +36,7 @@ export const resolvers = {
           },
           select: {
             id: true,
+            createdAt: true,
             title: true,
             description: true,
             image: true,
@@ -43,22 +50,17 @@ export const resolvers = {
                   select: {
                     id: true,
                     title: true,
-                    description: true,
                     image: true,
-                    author: {
-                      select: { id: true, createdAt: true, name: true, about: true },
-                    },
-                    createdAt: true,
                   },
                 },
               },
             },
-            createdAt: true,
           },
         })
         .finally(() => {
           ctx.db.$disconnect();
         });
+
       return book;
     },
 
@@ -74,10 +76,7 @@ export const resolvers = {
               select: {
                 id: true,
                 title: true,
-                description: true,
                 image: true,
-                author: true,
-                createdAt: true,
               },
             },
           },
@@ -104,14 +103,6 @@ export const resolvers = {
                 title: true,
                 description: true,
                 image: true,
-                author: {
-                  select: {
-                    id: true,
-                    createdAt: true,
-                    name: true,
-                    about: true,
-                  },
-                },
                 createdAt: true,
               },
             },

@@ -8,15 +8,15 @@ export const typeDefs = gql`
     description: String
     image: Image
   }
-  
+
   type Author {
     id: ID!
     name: String!
     about: String!
-    books: Book[]
+    books: [Book]
   }
 
-  type Image{
+  type Image {
     id: ID!
     url: String!
     width: Int
@@ -27,6 +27,6 @@ export const typeDefs = gql`
     books: [Book]
     book(id: ID!): Book
     authors: [Author]
-    author(id:ID!):Author
+    author(id: ID!): Author
   }
 `;
