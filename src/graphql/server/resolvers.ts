@@ -7,6 +7,7 @@ export const resolvers = {
         .findMany({
           select: {
             id: true,
+            createdAt: true,
             title: true,
             description: true,
             image: true,
@@ -19,7 +20,6 @@ export const resolvers = {
                 books: true,
               },
             },
-            createdAt: true,
           },
         })
         .finally(() => {
@@ -75,6 +75,7 @@ export const resolvers = {
             books: {
               select: {
                 id: true,
+                createdAt: true,
                 title: true,
                 image: true,
               },
@@ -100,10 +101,10 @@ export const resolvers = {
             books: {
               select: {
                 id: true,
+                createdAt: true,
                 title: true,
                 description: true,
                 image: true,
-                createdAt: true,
               },
             },
           },

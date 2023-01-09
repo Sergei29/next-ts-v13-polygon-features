@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClientSingletone } from '@/db';
 
 export type Book = {
-  title: string;
-  author: Author;
   id: string;
   createdAt: Date;
+  title: string;
+  author: Author;
   description: string | null;
   image: Image | null;
 };

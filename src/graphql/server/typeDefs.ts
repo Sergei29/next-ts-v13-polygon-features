@@ -3,6 +3,8 @@ import { gql } from 'graphql-tag';
 export const typeDefs = gql`
   type Book {
     id: ID!
+    createdAt: String!
+    updatedAt: String
     title: String!
     author: Author!
     description: String
@@ -11,6 +13,8 @@ export const typeDefs = gql`
 
   type Author {
     id: ID!
+    createdAt: String!
+    updatedAt: String
     name: String!
     about: String!
     books: [Book]
