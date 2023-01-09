@@ -13,24 +13,28 @@ datasource db {
 model Image {
   id     String @id @default(uuid())
   url    String
-  width  Int
-  height Int
-  Book   Book?
+  width  Int?
+  height Int?
+  book   Book?
 }
 
 model Book {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   title       String
   description String?
-  Author      Author  @relation(fields: [authorId], references: [id])
+  author      Author   @relation(fields: [authorId], references: [id])
   authorId    String
-  image       Image?  @relation(fields: [imageId], references: [id])
-  imageId     String? @unique
+  image       Image?   @relation(fields: [imageId], references: [id])
+  imageId     String?  @unique
 }
 
 model Author {
-  id    String @id @default(uuid())
-  name  String @unique
-  about String
-  books Book[]
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @unique
+  about     String
+  books     Book[]
 }

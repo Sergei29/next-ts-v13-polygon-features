@@ -1,19 +1,16 @@
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import { NextApiRequest } from 'next';
 
 import { typeDefs, resolvers } from '@/graphql/server';
+import { PrismaClientSingletone } from '@/db';
+import { ServerContextType } from '@/types';
 
-const getLoggedInUserJwt = async (req: NextApiRequest) => {
-  const jwt = req.cookies['jwt'];
-  return jwt;
-};
-
-const server = new ApolloServer({
+const server = new ApolloServer<ServerContextType>({
   resolvers,
   typeDefs,
+  introspection: process.env.NODE_ENV !== 'production',
 });
 
 export default startServerAndCreateNextHandler(server, {
-  context: async (req, res) => ({ req, res, jwt: await getLoggedInUserJwt(req) }),
+  context: async (req, res) => ({ req, res, db: new PrismaClientSingletone() }),
 });
