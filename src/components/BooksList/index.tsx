@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useQuery } from '@apollo/client';
 
 import { GET_BOOKS } from '@/graphql/client';
@@ -23,6 +24,16 @@ const BooksList = (): JSX.Element => {
               className="bg-slate-300 rounded-sm p-2 flex flex-col items-center"
               href={`/book/${current.id}`}
             >
+              {current.image ? (
+                <Image
+                  src={current.image.url}
+                  width={current.image.width}
+                  height={current.image.height}
+                  alt={current.title}
+                />
+              ) : (
+                <div>no image</div>
+              )}
               <h4>{current.title}</h4>
               <p>By {current.author.name}</p>
             </Link>

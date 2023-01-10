@@ -1,4 +1,4 @@
-import { Book, Author, ServerContextType } from '@/types';
+import { ServerContextType } from '@/types';
 
 export const resolvers = {
   Query: {
@@ -28,6 +28,7 @@ export const resolvers = {
 
       return books;
     },
+
     book: async (_: any, args: any, ctx: ServerContextType, info: any) => {
       const book = await ctx.db.book
         .findUnique({
