@@ -1,8 +1,8 @@
-import React from 'react';
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import React from "react";
+import type { NextPage } from "next";
+import Head from "next/head";
 
-import Navigation from '@/components/Navigation';
+import Navigation from "@/components/Navigation";
 
 interface IPageProps {
   children: React.ReactNode;
@@ -17,10 +17,10 @@ const Layout: NextPage<IPageProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
+      <header className="py-4">
         <Navigation />
       </header>
-      <main className="px-4 py-2">{children}</main>
+      <main className="w-[80%] mx-auto">{children}</main>
       <footer></footer>
     </>
   );
