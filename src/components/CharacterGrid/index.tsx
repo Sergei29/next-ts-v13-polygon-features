@@ -3,10 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getCharacters } from "@/lib";
 import { queryKeys } from "@/constants";
+import useAddFavorite from "@/hooks/useAddFavorite";
 import CharacterCard from "@/components/CharacterCard";
 import { Character, PaginatedList } from "@/types";
 
 export default function CharacterGrid() {
+  const { handleAddFavorite } = useAddFavorite();
   const { data, isLoading, isError } = useQuery<PaginatedList<Character>>(
     [queryKeys.characters],
     () => getCharacters()
@@ -30,7 +32,11 @@ export default function CharacterGrid() {
     >
       {data &&
         data.results.map((character) => (
-          <CharacterCard key={character.id} character={character} />
+          <CharacterCard
+            key={character.id}
+            character={character}
+            handleAddFavorite={handleAddFavorite}
+          />
         ))}
     </div>
   );

@@ -33,8 +33,7 @@ const HomePage: NextPage<IPageProps> = ({}) => {
         <title>Home Page</title>
         <meta name="description" content="Rick An Morty Characters" />
       </Head>
-      {/* <Favorites />
-       */}
+      <Favorites />
       <CharacterGrid />
     </>
   );

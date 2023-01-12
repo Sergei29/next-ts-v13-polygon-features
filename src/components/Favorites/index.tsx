@@ -1,35 +1,26 @@
 import React from "react";
 import Image from "next/image";
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@tanstack/react-query";
 
-import {
-  GET_FAVORITE_CHARACTERS,
-  favoriteCharactersVar,
-} from "@/graphql/client";
-import { Character, PaginatedList } from "@/types";
+import { queryKeys } from "@/constants";
+import { getCharacters } from "@/lib";
+import useAddFavorite from "@/hooks/useAddFavorite";
 
 const Favorites = (): JSX.Element => {
-  const { data, loading, error } = useQuery<{
-    characters: PaginatedList<Pick<Character, "id" | "image" | "isFavorite">>;
-  }>(GET_FAVORITE_CHARACTERS);
+  const { data, isLoading, isError } = useQuery([queryKeys.characters], () =>
+    getCharacters()
+  );
+  const { handleAddFavorite } = useAddFavorite();
 
-  const handleRemoveFromFavorites = (characterId: string) => {
-    favoriteCharactersVar(
-      favoriteCharactersVar().filter((current) => current !== characterId)
-    );
-  };
-
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>{error.message}</div>;
+  if (isError) {
+    return <div>Error occurred</div>;
   }
 
-  const {
-    characters: { results },
-  } = data!;
+  const { results } = data!;
 
   const favorites = results.filter((character) => character.isFavorite);
 
@@ -55,7 +46,7 @@ const Favorites = (): JSX.Element => {
             className="w-full rounded-full border-solid border-4 border-[#318bbe]"
           />
           <button
-            onClick={() => handleRemoveFromFavorites(character.id)}
+            onClick={() => handleAddFavorite(character.id)}
             className=" absolute left-0 bottom-1 w-[30px] h-[30px] rounded-full border-solid border-4 border-[#318bbe] hover:bg-red-900 bg-red-800 text-white flex justify-center items-center pb-1"
           >
             <span>x</span>

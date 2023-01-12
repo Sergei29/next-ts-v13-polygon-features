@@ -1,27 +1,30 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
-// import { favoriteCharactersVar } from "@/graphql/client";
-import { Character } from "@/types";
+import { queryKeys } from "@/constants";
+import { Character, PaginatedList } from "@/types";
 
 interface IProps {
   character: Character;
+  handleAddFavorite: (id: string) => void;
 }
 
-const CharacterCard = ({ character }: IProps): JSX.Element => {
-  const handleAdd = () => {
-    // const currentSelectedIds = favoriteCharactersVar();
-    // const newSelectedIds = character.isFavorite
-    //   ? currentSelectedIds.filter((current) => current !== character.id)
-    //   : [...currentSelectedIds, character.id];
-    // favoriteCharactersVar(newSelectedIds);
+const CharacterCard = ({
+  character,
+  handleAddFavorite,
+}: IProps): JSX.Element => {
+  const handleAdd = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    handleAddFavorite(character.id);
   };
 
   return (
     <Link
       href={`/character/${character.id}`}
-      className="flex flex-col p-4 border-2 border-solid border-[#80acbb] rounded-md bg-yellow-50"
+      className="flex flex-col p-4 border-2 border-solid border-[#80acbb] rounded-md bg-yellow-50 relative z-1"
     >
       <Image
         src={character.image}
@@ -35,7 +38,7 @@ const CharacterCard = ({ character }: IProps): JSX.Element => {
         <h3>{character.species}</h3>
       </div>
       <button
-        className="mt-auto bg-purple-800 px-2 py-1 rounded-md text-yellow-50 hover:bg-yellow-50 hover:text-purple-800 hover:border-2 hover:border-solid hover:border-purple-800"
+        className="relative z-10 mt-auto bg-purple-800 px-2 py-1 rounded-md text-yellow-50 hover:bg-yellow-50 hover:text-purple-800 hover:border-2 hover:border-solid hover:border-purple-800"
         onClick={handleAdd}
       >
         {character.isFavorite ? "Remove from" : "Add to"} favorites
