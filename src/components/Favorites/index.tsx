@@ -10,7 +10,9 @@ const Favorites = (): JSX.Element => {
   const { data, isLoading, isError } = useQuery([queryKeys.characters], () =>
     getCharacters()
   );
-  const { handleAddFavorite } = useAddFavorite();
+  const { handleAddFavorite, characters } = useAddFavorite({
+    characters: data?.results,
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -22,9 +24,7 @@ const Favorites = (): JSX.Element => {
 
   const { results } = data!;
 
-  const favorites = results.filter((character) => character.isFavorite);
-
-  if (!favorites.length) {
+  if (!characters.length) {
     return (
       <div className="flex justify-center items-center min-h-[220px] mt-4">
         <p className="text-[#318bbe] font-semibold">
@@ -36,7 +36,7 @@ const Favorites = (): JSX.Element => {
 
   return (
     <div className="grid gap-6 grid-cols-8 min-h-[220px] mt-4">
-      {favorites.map((character) => (
+      {characters.map((character) => (
         <div key={character.id} className="relative h-[100px]">
           <Image
             src={character.image}

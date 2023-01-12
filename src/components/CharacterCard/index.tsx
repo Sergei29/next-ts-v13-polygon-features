@@ -1,24 +1,31 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 
-import { queryKeys } from "@/constants";
-import { Character, PaginatedList } from "@/types";
+import { Character } from "@/types";
+import { useFavorites } from "@/providers/FavoritesProvider";
 
+const getButtonClassName = (isFavorite: boolean) =>
+  isFavorite
+    ? "relative z-10 mt-auto bg-purple-800 px-2 py-1 rounded-md text-yellow-50 border-solid border-2 border-transparent hover:bg-yellow-50 hover:text-purple-800 hover:border-2 hover:border-solid hover:border-purple-800"
+    : "relative z-10 mt-auto bg-[#318bbe] px-2 py-1 rounded-md text-yellow-50 border-solid border-2 border-transparent hover:bg-yellow-50 hover:text-purple-800 hover:border-2 hover:border-solid hover:border-purple-800";
 interface IProps {
   character: Character;
-  handleAddFavorite: (id: string) => void;
 }
 
-const CharacterCard = ({
-  character,
-  handleAddFavorite,
-}: IProps): JSX.Element => {
+const CharacterCard = ({ character }: IProps): JSX.Element => {
+  const { state, setState } = useFavorites();
+  const isFavorite = state.favorites.includes(character.id);
+
   const handleAdd = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    handleAddFavorite(character.id);
+    setState((current) => ({
+      ...current,
+      favorites: current.favorites.includes(character.id)
+        ? current.favorites.filter((charId) => charId !== character.id)
+        : [...current.favorites, character.id],
+    }));
   };
 
   return (
@@ -37,11 +44,8 @@ const CharacterCard = ({
         <h2>{character.name}</h2>
         <h3>{character.species}</h3>
       </div>
-      <button
-        className="relative z-10 mt-auto bg-purple-800 px-2 py-1 rounded-md text-yellow-50 hover:bg-yellow-50 hover:text-purple-800 hover:border-2 hover:border-solid hover:border-purple-800"
-        onClick={handleAdd}
-      >
-        {character.isFavorite ? "Remove from" : "Add to"} favorites
+      <button className={getButtonClassName(isFavorite)} onClick={handleAdd}>
+        {isFavorite ? "Remove from" : "Add to"} favorites
       </button>
     </Link>
   );

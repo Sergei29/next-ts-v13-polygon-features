@@ -3,7 +3,6 @@ export type Character = {
   name: string;
   image: string;
   species: string;
-  isFavorite?: boolean;
 };
 
 export type PageInfo = {
