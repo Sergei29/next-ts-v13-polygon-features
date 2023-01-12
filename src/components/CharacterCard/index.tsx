@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // import { favoriteCharactersVar } from "@/graphql/client";
 import { Character } from "@/types";
@@ -18,8 +19,8 @@ const CharacterCard = ({ character }: IProps): JSX.Element => {
   };
 
   return (
-    <div
-      key={character.id}
+    <Link
+      href={`/character/${character.id}`}
       className="flex flex-col p-4 border-2 border-solid border-[#80acbb] rounded-md bg-yellow-50"
     >
       <Image
@@ -39,7 +40,7 @@ const CharacterCard = ({ character }: IProps): JSX.Element => {
       >
         {character.isFavorite ? "Remove from" : "Add to"} favorites
       </button>
-    </div>
+    </Link>
   );
 };
 
