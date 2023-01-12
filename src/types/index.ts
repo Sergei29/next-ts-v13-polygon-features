@@ -9,8 +9,8 @@ export type Character = {
 export type PageInfo = {
   count: number;
   pages: number;
-  next: number | null;
-  prev: number | null;
+  next: string | null;
+  prev: string | null;
 };
 
 export type PaginatedList<T> = {

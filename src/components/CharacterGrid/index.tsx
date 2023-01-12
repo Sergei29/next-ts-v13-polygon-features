@@ -1,33 +1,35 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { GET_CHARACTERS } from '@/graphql/client';
-import CharacterCard from '@/components/CharacterCard';
-import { Character, PaginatedList } from '@/types';
+import { getCharacters } from "@/lib";
+import { queryKeys } from "@/constants";
+import CharacterCard from "@/components/CharacterCard";
+import { Character, PaginatedList } from "@/types";
 
 export default function CharacterGrid() {
-  const { data, loading, error } = useQuery<{ characters: PaginatedList<Character> }>(
-    GET_CHARACTERS
+  const { data, isLoading, isError } = useQuery<PaginatedList<Character>>(
+    [queryKeys.characters],
+    () => getCharacters()
   );
 
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>{error.message}</div>;
+  if (isError) {
+    return <div>Error fetching characters</div>;
   }
 
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
         gap: 20,
       }}
     >
       {data &&
-        data.characters.results.map((character) => (
+        data.results.map((character) => (
           <CharacterCard key={character.id} character={character} />
         ))}
     </div>

@@ -1,19 +1,21 @@
-import type { AppProps } from 'next/app';
-import { ApolloProvider } from '@apollo/client';
+import type { AppProps } from "next/app";
+import { Hydrate, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { useApollo } from '@/graphql/client';
-import Layout from '@/components/Layout';
-import '@/styles/globals.css';
+import { queryClient } from "@/queryClient";
+import Layout from "@/components/Layout";
+import "@/styles/globals.css";
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const apolloClient = useApollo(pageProps);
-
   return (
-    <ApolloProvider client={apolloClient}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Hydrate>
+    </QueryClientProvider>
   );
 };
 
