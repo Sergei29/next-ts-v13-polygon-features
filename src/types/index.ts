@@ -17,3 +17,11 @@ export type PaginatedList<T> = {
   info: PageInfo;
   results: T[];
 };
+
+export type AuthState = {
+  authState: boolean;
+};
+
+export type AppState = {
+  auth: AuthState;
+} & Record<string, any>;

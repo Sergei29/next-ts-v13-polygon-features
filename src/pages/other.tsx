@@ -1,5 +1,5 @@
 import React from "react";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 
 import { selectAuthState, setAuthState } from "@/redux/slices/authSlice";
@@ -9,19 +9,20 @@ interface IPageProps {
   [x: string]: any;
 }
 
-const HomePage: NextPage<IPageProps> = ({}) => {
+const OtherPage: NextPage<IPageProps> = ({}) => {
   const authState = useSelector(selectAuthState);
   const dispatch = useDispatch();
 
   return (
     <>
       <Head>
-        <title>Home Page</title>
-        <meta name="description" content="Rick An Morty Characters" />
+        <title>Page</title>
+        <meta name="description" content="Next page" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold underline">Home page</h1>
+        <h1 className="text-3xl font-bold underline">Other page</h1>
         <h4 className="text-xl font-bold ">
           {authState ? "Logged in 👍" : "Not Logged In ⏳"}
         </h4>
@@ -40,4 +41,4 @@ const HomePage: NextPage<IPageProps> = ({}) => {
   );
 };
 
-export default HomePage;
+export default OtherPage;
