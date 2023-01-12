@@ -1,33 +1,32 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React from "react";
+import CharacterCard from "@/components/CharacterCard";
+import { Character } from "@/types";
 
-import { GET_CHARACTERS } from '@/graphql/client';
-import CharacterCard from '@/components/CharacterCard';
-import { Character, PaginatedList } from '@/types';
+type Props = {
+  data: Character[];
+  loading: boolean;
+  error: string | null;
+};
 
-export default function CharacterGrid() {
-  const { data, loading, error } = useQuery<{ characters: PaginatedList<Character> }>(
-    GET_CHARACTERS
-  );
-
+export default function CharacterGrid({ data, loading, error }: Props) {
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error.message}</div>;
+    return <div>{error}</div>;
   }
 
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
         gap: 20,
       }}
     >
       {data &&
-        data.characters.results.map((character) => (
+        data.map((character) => (
           <CharacterCard key={character.id} character={character} />
         ))}
     </div>

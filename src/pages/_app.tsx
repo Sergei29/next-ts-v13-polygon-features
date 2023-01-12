@@ -1,19 +1,13 @@
-import type { AppProps } from 'next/app';
-import { ApolloProvider } from '@apollo/client';
+import type { AppProps } from "next/app";
 
-import { useApollo } from '@/graphql/client';
-import Layout from '@/components/Layout';
-import '@/styles/globals.css';
+import Layout from "@/components/Layout";
+import "@/styles/globals.css";
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const apolloClient = useApollo(pageProps);
-
   return (
-    <ApolloProvider client={apolloClient}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
 };
 

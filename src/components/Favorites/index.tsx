@@ -1,39 +1,26 @@
 import React from "react";
 import Image from "next/image";
-import { useQuery } from "@apollo/client";
 
-import {
-  GET_FAVORITE_CHARACTERS,
-  favoriteCharactersVar,
-} from "@/graphql/client";
-import { Character, PaginatedList } from "@/types";
+import { Character } from "@/types";
 
-const Favorites = (): JSX.Element => {
-  const { data, loading, error } = useQuery<{
-    characters: PaginatedList<Pick<Character, "id" | "image" | "isFavorite">>;
-  }>(GET_FAVORITE_CHARACTERS);
+type Props = {
+  data: Character[];
+  loading: boolean;
+  error: string | null;
+};
 
-  const handleRemoveFromFavorites = (characterId: string) => {
-    favoriteCharactersVar(
-      favoriteCharactersVar().filter((current) => current !== characterId)
-    );
-  };
+const Favorites = ({ data, loading, error }: Props): JSX.Element => {
+  const handleRemoveFromFavorites = (characterId: string) => {};
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error.message}</div>;
+    return <div>{error}</div>;
   }
 
-  const {
-    characters: { results },
-  } = data!;
-
-  const favorites = results.filter((character) => character.isFavorite);
-
-  if (!favorites.length) {
+  if (!data.length) {
     return (
       <div className="flex justify-center items-center min-h-[220px] mt-4">
         <p className="text-[#318bbe] font-semibold">
@@ -45,7 +32,7 @@ const Favorites = (): JSX.Element => {
 
   return (
     <div className="grid gap-6 grid-cols-8 min-h-[220px] mt-4">
-      {favorites.map((character) => (
+      {data.map((character) => (
         <div key={character.id} className="relative h-[100px]">
           <Image
             src={character.image}
