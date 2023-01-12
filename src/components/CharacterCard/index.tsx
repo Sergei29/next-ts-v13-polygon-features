@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
+import { favoriteCharactersVar } from "@/graphql/client";
 import { Character } from "@/types";
 
 interface IProps {
@@ -9,14 +10,14 @@ interface IProps {
 
 const CharacterCard = ({ character }: IProps): JSX.Element => {
   const handleAdd = () => {
-    // spaceshipPassengersVar(
-    //     character.isSpaceshipPassenger
-    //       ? spaceshipPassengersVar().filter(
-    //           (characterId) => characterId !== character.id
-    //         )
-    //       : [...spaceshipPassengersVar(), character.id]
-    //   )
+    const currentSelectedIds = favoriteCharactersVar();
+    const newSelectedIds = character.isFavorite
+      ? currentSelectedIds.filter((current) => current !== character.id)
+      : [...currentSelectedIds, character.id];
+
+    favoriteCharactersVar(newSelectedIds);
   };
+
   return (
     <div
       key={character.id}

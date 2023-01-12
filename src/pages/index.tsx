@@ -1,9 +1,14 @@
-import React from 'react';
-import { NextPage, GetStaticProps } from 'next';
-import Head from 'next/head';
+import React from "react";
+import { NextPage, GetStaticProps } from "next";
+import Head from "next/head";
 
-import { initialiseApolloClient, addApolloState, GET_CHARACTERS } from '@/graphql/client';
-import CharacterGrid from '@/components/CharacterGrid';
+import {
+  initialiseApolloClient,
+  addApolloState,
+  GET_CHARACTERS,
+} from "@/graphql/client";
+import CharacterGrid from "@/components/CharacterGrid";
+import Favorites from "@/components/Favorites";
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const apolloClient = initialiseApolloClient();
@@ -27,7 +32,7 @@ const HomePage: NextPage<IPageProps> = ({}) => {
         <title>Home Page</title>
         <meta name="description" content="Rick An Morty Characters" />
       </Head>
-
+      <Favorites />
       <CharacterGrid />
     </>
   );
