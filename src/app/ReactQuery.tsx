@@ -11,7 +11,7 @@ type Props = {
 };
 
 const ReactQuery = ({ children, dehydratedState }: Props) => {
-  const [queryClient] = useState(new QueryClient());
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <>
