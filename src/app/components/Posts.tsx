@@ -1,29 +1,11 @@
 'use client';
+
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-const getPosts = async (): Promise<
-  {
-    id: number;
-    title: string;
-  }[]
-> => {
-  try {
-    const res = await fetch('/api/posts');
-    if (!res.ok) {
-      throw new Error('Failed to fetch posts');
-    }
-    return await res.json();
-  } catch (error) {
-    throw error;
-  }
-};
+import { getPosts } from '@/lib';
 
-interface IProps {
-  [x: string]: any;
-}
-
-const Posts = ({}: IProps): JSX.Element => {
+const Posts = (): JSX.Element => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['posts'],
     queryFn: () => getPosts(),

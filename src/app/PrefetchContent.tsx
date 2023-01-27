@@ -1,13 +1,16 @@
 import React from 'react';
-import { QueryClient, dehydrate } from '@tanstack/query-core';
+import { dehydrate, QueryClient } from '@tanstack/query-core';
+
+import { generateQueryClient } from '@/queryClient';
+import { fetchTest } from '@/lib';
+
 import ReactQuery from './ReactQuery';
-import { fetchTest } from '../lib';
 
 interface IProps {
   children: React.ReactNode;
 }
 
-const Provider = async ({ children }: IProps) => {
+const PrefetchContent = async ({ children }: IProps) => {
   const queryClient = new QueryClient();
 
   // alternatively, use queryClient.setQuery and/or access data directly
@@ -20,4 +23,4 @@ const Provider = async ({ children }: IProps) => {
   return provider;
 };
 
-export default Provider;
+export default PrefetchContent;

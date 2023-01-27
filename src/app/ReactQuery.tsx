@@ -5,14 +5,14 @@ import { QueryClient, QueryClientProvider, Hydrate, DehydratedState } from '@tan
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Script from 'next/script';
 
+import { queryClient } from '@/queryClient';
+
 type Props = {
   dehydratedState: DehydratedState;
   children: React.ReactNode;
 };
 
 const ReactQuery = ({ children, dehydratedState }: Props) => {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     <>
       <QueryClientProvider client={queryClient}>

@@ -1,5 +1,5 @@
 import './globals.css';
-import Provider from './Provider';
+import Provider from './PrefetchContent';
 
 type Props = {
   children: React.ReactNode;
@@ -13,10 +13,7 @@ export default function RootLayout({ children }: Props) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
-        {/* @ts-expect-error Server Component */}
-        <Provider>{children}</Provider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
