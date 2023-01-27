@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import fetchTest from '../lib';
+import { fetchTest } from '../lib';
 
 export default function Content() {
   const { data, isLoading, isError } = useQuery<string>(['test'], fetchTest);

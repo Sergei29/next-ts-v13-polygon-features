@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClient, dehydrate } from '@tanstack/query-core';
 import ReactQuery from './ReactQuery';
-import fetchTest from '../lib';
+import { fetchTest } from '../lib';
 
 interface IProps {
   children: React.ReactNode;
