@@ -1,29 +1,14 @@
-import { getProductById } from "./products"
 import { ICart } from "@/types"
+import { readFileFromDb, writeFileToDb } from "./fs"
+import { getProductById } from "./products"
 
-const cart: ICart = {
-  products: [
-    {
-      id: 1,
-      name: "Castle T-Shirt",
-      image: "/castle-t-shirt.jpg",
-      price: 25,
-    },
-    {
-      id: 2,
-      name: "Dragon T-Shirt",
-      image: "/dragon-t-shirt.jpg",
-      price: 25,
-    },
-  ],
-}
-
-export const getCart = async (): Promise<ICart> => {
-  return cart
-}
+export const getCart = async (): Promise<ICart> =>
+  await readFileFromDb<ICart>("cart")
 
 export const addToCart = async (productId: number): Promise<ICart> => {
   const product = await getProductById(productId)
+  const cart = await getCart()
+
   if (product) {
     cart.products.push({
       name: product.name,
@@ -32,10 +17,16 @@ export const addToCart = async (productId: number): Promise<ICart> => {
       price: product.price,
     })
   }
-  return cart
+
+  await writeFileToDb("cart", cart)
+
+  return await getCart()
 }
 
 export const clearCart = async (): Promise<ICart> => {
+  const cart = await getCart()
   cart.products = []
-  return cart
+  await writeFileToDb("cart", cart)
+
+  return await getCart()
 }
