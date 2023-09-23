@@ -2,16 +2,17 @@
 
 import { useState } from "react"
 
+import { useReviews } from "@/providers/ReviewsProvider"
 import { IReview } from "@/types"
 
 interface IProps {
-  reviews: IReview[]
   addReviewAction: (text: string, rating: number) => Promise<IReview[]>
 }
 
-const Reviews = ({ reviews, addReviewAction }: IProps): JSX.Element => {
+const Reviews = ({ addReviewAction }: IProps): JSX.Element => {
   const [reviewText, setReviewText] = useState("")
   const [reviewRating, setReviewRating] = useState(5)
+  const [reviews, setReviews] = useReviews()
 
   return (
     <>
@@ -28,7 +29,8 @@ const Reviews = ({ reviews, addReviewAction }: IProps): JSX.Element => {
       <form
         onSubmit={async (evt) => {
           evt.preventDefault()
-          await addReviewAction(reviewText, reviewRating)
+          const updatedReviews = await addReviewAction(reviewText, reviewRating)
+          setReviews(updatedReviews)
           setReviewText("")
           setReviewRating(5)
         }}

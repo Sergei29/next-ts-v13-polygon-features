@@ -1,12 +1,10 @@
 "use client"
 
-import { IReview } from "@/types"
+import { useReviews } from "@/providers/ReviewsProvider"
 
-interface IProps {
-  reviews: IReview[]
-}
+const AverageRating = (): JSX.Element => {
+  const [reviews] = useReviews()
 
-const AverageRating = ({ reviews }: IProps): JSX.Element => {
   return (
     <>
       {reviews && reviews?.length && (
