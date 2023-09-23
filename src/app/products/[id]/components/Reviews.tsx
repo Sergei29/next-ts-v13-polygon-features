@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
-import { IReview } from "@/types";
+import { IReview } from "@/types"
 
-interface IProps{
-  reviews: IReview[];
-  addReviewAction: (text: string, rating: number) => Promise<IReview[]>;
+interface IProps {
+  reviews: IReview[]
+  addReviewAction: (text: string, rating: number) => Promise<IReview[]>
 }
 
-const Reviews = ({reviews, addReviewAction }:IProps):JSX.Element => {
-  const [reviewText, setReviewText] = useState("");
-  const [reviewRating, setReviewRating] = useState(5);
+const Reviews = ({ reviews, addReviewAction }: IProps): JSX.Element => {
+  const [reviewText, setReviewText] = useState("")
+  const [reviewRating, setReviewRating] = useState(5)
 
   return (
     <>
@@ -27,10 +27,10 @@ const Reviews = ({reviews, addReviewAction }:IProps):JSX.Element => {
       ))}
       <form
         onSubmit={async (evt) => {
-          evt.preventDefault();
-          await addReviewAction(reviewText, reviewRating);
-          setReviewText("");
-          setReviewRating(5);
+          evt.preventDefault()
+          await addReviewAction(reviewText, reviewRating)
+          setReviewText("")
+          setReviewRating(5)
         }}
       >
         <div className="flex flex-row gap-2 items-center">
@@ -63,7 +63,7 @@ const Reviews = ({reviews, addReviewAction }:IProps):JSX.Element => {
         </div>
       </form>
     </>
-  );
+  )
 }
 
 export default Reviews

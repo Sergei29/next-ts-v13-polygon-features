@@ -1,15 +1,12 @@
-"use client";
-import { type ICart } from "@/types";
+"use client"
+import { type ICart } from "@/types"
 
 interface IProps {
-  cart: ICart;
-  clearCartAction: () => Promise<ICart>;
+  cart: ICart
+  clearCartAction: () => Promise<ICart>
 }
 
-const CartPopup = ({
-  cart,
-  clearCartAction,
-}: IProps) => {
+const CartPopup = ({ cart, clearCartAction }: IProps) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-1/2 p-4 bg-white rounded-lg">
@@ -52,7 +49,7 @@ const CartPopup = ({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default CartPopup

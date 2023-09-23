@@ -1,20 +1,14 @@
-import Image from "next/image";
+import Image from "next/image"
 
 interface IProps {
-  name?: string;
-  image?: string | null;
-  description?: string;
-  price?: number;
-  small?: boolean;
+  name?: string
+  image?: string | null
+  description?: string
+  price?: number
+  small?: boolean
 }
 
-const ProductCard = ({
-  name,
-  description,
-  price,
-  image,
-  small,
-}: IProps) => (
+const ProductCard = ({ name, description, price, image, small }: IProps) => (
   <div className="p-2 flex flex-col">
     <Image
       className={`aspect-[2/2] rounded-md object-cover`}
@@ -48,6 +42,6 @@ const ProductCard = ({
       )}
     </div>
   </div>
-);
+)
 
-export default ProductCard;
+export default ProductCard

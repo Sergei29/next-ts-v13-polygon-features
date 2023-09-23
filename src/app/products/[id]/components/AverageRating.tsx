@@ -1,10 +1,12 @@
-'use client'
+"use client"
 
-import { IReview } from "@/types";
+import { IReview } from "@/types"
 
-interface IProps { reviews: IReview[] }
+interface IProps {
+  reviews: IReview[]
+}
 
-const AverageRating = ({ reviews }: IProps):JSX.Element => {
+const AverageRating = ({ reviews }: IProps): JSX.Element => {
   return (
     <>
       {reviews && reviews?.length && (

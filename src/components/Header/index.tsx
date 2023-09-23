@@ -1,20 +1,17 @@
-"use client";
-import { useState } from "react";
-import Link from "next/link";
+"use client"
+import { useState } from "react"
+import Link from "next/link"
 
-import CartPopup from "@/components/CartPopup";
-import { type ICart } from "@/types";
+import CartPopup from "@/components/CartPopup"
+import { type ICart } from "@/types"
 
 interface IProps {
-  cart: ICart;
-  clearCartAction: () => Promise<ICart>;
+  cart: ICart
+  clearCartAction: () => Promise<ICart>
 }
 
-const Header = ({
-  cart,
-  clearCartAction,
-}: IProps)  =>{
-  const [showCart, setShowCart] = useState(false);
+const Header = ({ cart, clearCartAction }: IProps) => {
+  const [showCart, setShowCart] = useState(false)
 
   return (
     <header className="mx-2 flex items-center justify-between p-4 bg-blue-800 mb-10 shadow-lg shadow-white rounded-b-2xl">
@@ -26,7 +23,7 @@ const Header = ({
       <div
         className="flex items-center justify-center w-10 h-10 bg-blue-700 rounded-full"
         onClick={() => {
-          setShowCart(!showCart);
+          setShowCart(!showCart)
         }}
       >
         <span className="text-xl font-bold leading-10 text-gray-100">
@@ -37,7 +34,7 @@ const Header = ({
         )}
       </div>
     </header>
-  );
+  )
 }
 
 export default Header

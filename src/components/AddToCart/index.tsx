@@ -1,14 +1,12 @@
-"use client";
+"use client"
 
-import { type ICart } from "@/types";
+import { type ICart } from "@/types"
 
 interface IProps {
-  addToCartAction: () => Promise<ICart>;
+  addToCartAction: () => Promise<ICart>
 }
 
-const AddToCart = ({
-  addToCartAction,
-}: IProps) => {
+const AddToCart = ({ addToCartAction }: IProps) => {
   return (
     <button
       className="mt-6 px-8 py-2 text-lg font-bold text-white bg-blue-800 rounded-lg"
@@ -16,7 +14,7 @@ const AddToCart = ({
     >
       Add To Cart
     </button>
-  );
+  )
 }
 
 export default AddToCart

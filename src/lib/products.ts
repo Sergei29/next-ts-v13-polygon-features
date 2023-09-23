@@ -1,4 +1,4 @@
-import { IProduct, IReview } from "@/types";
+import { IProduct, IReview } from "@/types"
 
 const products = [
   {
@@ -109,25 +109,25 @@ const products = [
       },
     ],
   },
-];
+]
 
-export const getProducts = async (): Promise<IProduct[]> => products;
+export const getProducts = async (): Promise<IProduct[]> => products
 
 export const addReview = async (
   id: number,
   review: {
-    rating: number;
-    text: string;
-  }
+    rating: number
+    text: string
+  },
 ): Promise<IReview[] | undefined> => {
-  const product = await getProductById(id);
+  const product = await getProductById(id)
   if (product) {
-    product.reviews.push(review);
+    product.reviews.push(review)
   }
-  return product?.reviews;
-};
+  return product?.reviews
+}
 
 export const getProductById = async (
-  id: number
+  id: number,
 ): Promise<IProduct | undefined> =>
-  getProducts().then((products) => products.find((p) => p.id === id));
+  getProducts().then((products) => products.find((p) => p.id === id))

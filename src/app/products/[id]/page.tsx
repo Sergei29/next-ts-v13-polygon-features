@@ -1,37 +1,34 @@
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import Link from "next/link";
+import Image from "next/image"
+import { notFound } from "next/navigation"
+import Link from "next/link"
 
-import { getProductById, getProducts, addToCart, addReview } from "@/lib";
-import { IPageProps } from "@/types";
-import AddToCart from '@/components/AddToCart'
-import ProductCard from '@/components/ProductCard'
-import AverageRating from './components/AverageRating'
-import Reviews from './components/Reviews'
+import { getProductById, getProducts, addToCart, addReview } from "@/lib"
+import { IPageProps } from "@/types"
+import AddToCart from "@/components/AddToCart"
+import ProductCard from "@/components/ProductCard"
+import AverageRating from "./components/AverageRating"
+import Reviews from "./components/Reviews"
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 
-const ProductsPage = async ({ params: { id } }:IPageProps<{ id: string }>) => {
-  const product = await getProductById(+id);
-  const products = await getProducts();
+const ProductsPage = async ({ params: { id } }: IPageProps<{ id: string }>) => {
+  const product = await getProductById(+id)
+  const products = await getProducts()
 
   if (!product) {
-    notFound();
+    notFound()
   }
 
-  const addToCartAction = async() => {
-    'use server'
+  const addToCartAction = async () => {
+    "use server"
     return await addToCart(+id)
-    
   }
 
-  const addReviewAction = async(text: string, rating: number) => {
-    'use server'
-    const updatedReviews = await addReview(+id, {text, rating})
-    return updatedReviews||[]
+  const addReviewAction = async (text: string, rating: number) => {
+    "use server"
+    const updatedReviews = await addReview(+id, { text, rating })
+    return updatedReviews || []
   }
-  
-  
 
   return (
     <div className="flex flex-wrap">

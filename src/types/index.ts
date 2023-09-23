@@ -1,31 +1,30 @@
-import { ReactNode } from "react";
+import { ReactNode } from "react"
 
 export interface IPageProps<
   P = Record<string, string>,
-  Q = Record<string, string>
+  Q = Record<string, string>,
 > {
-  params: P;
-  searchParams: Q;
+  params: P
+  searchParams: Q
 }
 
 export interface IParentProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
-
 export interface IReview {
-  rating: number;
-  text: string;
+  rating: number
+  text: string
 }
 
 export interface IProduct {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  description: string;
-  reviews: IReview[];
+  id: number
+  image: string
+  name: string
+  price: number
+  description: string
+  reviews: IReview[]
 }
 export interface ICart {
-  products: Pick<IProduct, "id"|"name"|"image"|"price">[];
+  products: Pick<IProduct, "id" | "name" | "image" | "price">[]
 }

@@ -1,5 +1,5 @@
-import { getProductById } from "./products";
-import { ICart } from "@/types";
+import { getProductById } from "./products"
+import { ICart } from "@/types"
 
 const cart: ICart = {
   products: [
@@ -16,26 +16,26 @@ const cart: ICart = {
       price: 25,
     },
   ],
-};
+}
 
 export const getCart = async (): Promise<ICart> => {
-  return cart;
-};
+  return cart
+}
 
 export const addToCart = async (productId: number): Promise<ICart> => {
-  const product = await getProductById(productId);
+  const product = await getProductById(productId)
   if (product) {
     cart.products.push({
       name: product.name,
       id: product.id,
       image: product.image,
       price: product.price,
-    });
+    })
   }
-  return cart;
-};
+  return cart
+}
 
 export const clearCart = async (): Promise<ICart> => {
-  cart.products = [];
-  return cart;
-};
+  cart.products = []
+  return cart
+}
