@@ -2,7 +2,7 @@ import "@/styles/globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 
-import { CartProvider } from "@/providers/CartProvider"
+import StoreProvider from "@/store/StoreProvider"
 import Header from "@/components/Header"
 import { getCart, clearCart } from "@/lib"
 import { IParentProps } from "@/types"
@@ -28,10 +28,10 @@ const RootLayout = async ({ children }: IParentProps) => {
     <html lang="en">
       <head />
       <body className={inter.className}>
-        <CartProvider cart={cart}>
+        <StoreProvider cart={cart}>
           <Header clearCartAction={clearCartAction} />
           <main className="mx-auto max-w-3xl">{children}</main>
-        </CartProvider>
+        </StoreProvider>
       </body>
     </html>
   )

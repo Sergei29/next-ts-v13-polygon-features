@@ -3,7 +3,7 @@ import { useState } from "react"
 import Link from "next/link"
 
 import CartPopup from "@/components/CartPopup"
-import { useCart } from "@/providers/CartProvider"
+import { useCart } from "@/store/store"
 import { type ICart } from "@/types"
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
 
 const Header = ({ clearCartAction }: IProps) => {
   const [showCart, setShowCart] = useState(false)
-  const [cart] = useCart()
+  const cart = useCart()
 
   return (
     <header className="mx-2 flex items-center justify-between p-4 bg-blue-800 mb-10 shadow-lg shadow-white rounded-b-2xl">

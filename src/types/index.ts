@@ -28,3 +28,7 @@ export interface IProduct {
 export interface ICart {
   products: Pick<IProduct, "id" | "name" | "image" | "price">[]
 }
+
+export interface ICartState {
+  cart: ICart
+}
