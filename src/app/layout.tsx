@@ -1,8 +1,8 @@
-import '@/styles/globals.css';
+import "@/styles/globals.css"
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export default function RootLayout({ children }: Props) {
   return (
@@ -14,5 +14,5 @@ export default function RootLayout({ children }: Props) {
       <head />
       <body>{children}</body>
     </html>
-  );
+  )
 }
