@@ -1,12 +1,15 @@
 "use client"
+
+import { useCart } from "@/providers/CartProvider"
 import { type ICart } from "@/types"
 
 interface IProps {
-  cart: ICart
   clearCartAction: () => Promise<ICart>
 }
 
-const CartPopup = ({ cart, clearCartAction }: IProps) => {
+const CartPopup = ({ clearCartAction }: IProps) => {
+  const [cart, setCart] = useCart()
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-1/2 p-4 bg-white rounded-lg">
@@ -39,7 +42,10 @@ const CartPopup = ({ cart, clearCartAction }: IProps) => {
         <div className="flex justify-between w-full">
           <button
             className="mt-6 px-4 py-2 text-lg font-bold text-white bg-green-800 rounded-lg"
-            onClick={async () => {}}
+            onClick={async () => {
+              const newCart = await clearCartAction()
+              setCart(newCart)
+            }}
           >
             Clear Cart
           </button>

@@ -3,15 +3,16 @@ import { useState } from "react"
 import Link from "next/link"
 
 import CartPopup from "@/components/CartPopup"
+import { useCart } from "@/providers/CartProvider"
 import { type ICart } from "@/types"
 
 interface IProps {
-  cart: ICart
   clearCartAction: () => Promise<ICart>
 }
 
-const Header = ({ cart, clearCartAction }: IProps) => {
+const Header = ({ clearCartAction }: IProps) => {
   const [showCart, setShowCart] = useState(false)
+  const [cart] = useCart()
 
   return (
     <header className="mx-2 flex items-center justify-between p-4 bg-blue-800 mb-10 shadow-lg shadow-white rounded-b-2xl">
@@ -29,9 +30,7 @@ const Header = ({ cart, clearCartAction }: IProps) => {
         <span className="text-xl font-bold leading-10 text-gray-100">
           {cart.products.length}
         </span>
-        {showCart && (
-          <CartPopup cart={cart} clearCartAction={clearCartAction} />
-        )}
+        {showCart && <CartPopup clearCartAction={clearCartAction} />}
       </div>
     </header>
   )
