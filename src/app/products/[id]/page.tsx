@@ -3,12 +3,12 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 
 import { getProductById, getProducts, addToCart, addReview } from "@/lib"
-import { ReviewsProvider } from "@/providers/ReviewsProvider"
 import { IPageProps } from "@/types"
 import AddToCart from "@/components/AddToCart"
 import ProductCard from "@/components/ProductCard"
 import AverageRating from "./components/AverageRating"
 import Reviews from "./components/Reviews"
+import InitializeReviews from "./components/InitializeReviews"
 
 export const dynamic = "force-dynamic"
 
@@ -32,7 +32,7 @@ const ProductsPage = async ({ params: { id } }: IPageProps<{ id: string }>) => {
   }
 
   return (
-    <ReviewsProvider reviews={product.reviews}>
+    <InitializeReviews initialReviews={product.reviews}>
       <div className="flex flex-wrap">
         <div className="w-full md:w-1/2">
           <Image
@@ -79,7 +79,7 @@ const ProductsPage = async ({ params: { id } }: IPageProps<{ id: string }>) => {
           </ul>
         </div>
       </div>
-    </ReviewsProvider>
+    </InitializeReviews>
   )
 }
 

@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 
-import { useReviews } from "@/providers/ReviewsProvider"
+import { useReviews, setReviews } from "@/store/store"
 import { IReview } from "@/types"
 
 interface IProps {
@@ -12,7 +13,9 @@ interface IProps {
 const Reviews = ({ addReviewAction }: IProps): JSX.Element => {
   const [reviewText, setReviewText] = useState("")
   const [reviewRating, setReviewRating] = useState(5)
-  const [reviews, setReviews] = useReviews()
+  const reviews = useReviews()
+
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -30,7 +33,7 @@ const Reviews = ({ addReviewAction }: IProps): JSX.Element => {
         onSubmit={async (evt) => {
           evt.preventDefault()
           const updatedReviews = await addReviewAction(reviewText, reviewRating)
-          setReviews(updatedReviews)
+          dispatch(setReviews(updatedReviews))
           setReviewText("")
           setReviewRating(5)
         }}

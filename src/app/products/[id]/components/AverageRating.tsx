@@ -1,9 +1,11 @@
 "use client"
 
-import { useReviews } from "@/providers/ReviewsProvider"
+import { useReviews } from "@/store/store"
+
+import { IReview } from "@/types"
 
 const AverageRating = (): JSX.Element => {
-  const [reviews] = useReviews()
+  const reviews = useReviews()
 
   return (
     <>

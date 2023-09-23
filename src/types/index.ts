@@ -32,3 +32,7 @@ export interface ICart {
 export interface ICartState {
   cart: ICart
 }
+
+export interface IReviewsState {
+  reviews: IReview[] | null
+}
