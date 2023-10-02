@@ -11,3 +11,8 @@ export interface PageProps<
 export interface ParentProps {
   children: ReactNode
 }
+
+export interface ICredentials {
+  email: string
+  password: string
+}
