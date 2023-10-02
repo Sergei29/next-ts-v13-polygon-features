@@ -1,7 +1,10 @@
 import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
+import { verifyUserCredentials } from "@/lib/api"
+
 const nextAuthOptions: NextAuthOptions = {
+  session: { strategy: "jwt" },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -10,13 +13,9 @@ const nextAuthOptions: NextAuthOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        const user = { id: "1", email: "jsmith@example.com" }
+        const user = await verifyUserCredentials(credentials)
 
-        if (user) {
-          return user
-        } else {
-          return null
-        }
+        return user
       },
     }),
   ],

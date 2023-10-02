@@ -1,6 +1,27 @@
 "use client"
 
 import React from "react"
+import { signIn } from "next-auth/react"
+
+const registerNewUser = async (formData: FormData) => {
+  try {
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        email: formData.get("email"),
+        password: formData.get("password"),
+      }),
+    })
+    if (!res.ok) {
+      throw new Error(res.statusText)
+    }
+
+    const data = await res.json()
+    console.log("data: ", data)
+  } catch (error) {
+    console.log("error", error)
+  }
+}
 
 interface IProps {
   isRegister: boolean
@@ -11,22 +32,16 @@ const AuthForm = ({ isRegister }: IProps): JSX.Element => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
 
-    try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify({
-          email: formData.get("email"),
-          password: formData.get("password"),
-        }),
+    if (isRegister) {
+      registerNewUser(formData)
+    } else {
+      const response = await signIn("credentials", {
+        email: formData.get("email"),
+        password: formData.get("password"),
+        redirect: false,
       })
-      if (!res.ok) {
-        throw new Error(res.statusText)
-      }
 
-      const data = await res.json()
-      console.log("data: ", data)
-    } catch (error) {
-      console.log("error", error)
+      console.log("response: ", response)
     }
   }
 
