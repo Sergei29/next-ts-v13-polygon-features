@@ -8,6 +8,6 @@ export interface PageProps<
   searchParams: Q
 }
 
-export interface ParentProps {
+export interface IParentProps {
   children: ReactNode
 }
