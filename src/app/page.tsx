@@ -1,6 +1,7 @@
 import React from "react"
 import type { NextPage } from "next"
 
+import NewTodoForm from "@/components/NewTodoForm"
 interface IPageProps {
   [x: string]: any
 }
@@ -8,7 +9,8 @@ interface IPageProps {
 const Homepage: NextPage<IPageProps> = ({}) => {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Next.JS v13</h1>
+      <h1 className="text-3xl font-bold underline">Todo app</h1>
+      <NewTodoForm />
     </>
   )
 }
