@@ -11,3 +11,7 @@ export interface PageProps<
 export interface IParentProps {
   children: ReactNode
 }
+
+export interface ITodo {
+  [x: string]: any
+}

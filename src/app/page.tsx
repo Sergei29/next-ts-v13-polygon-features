@@ -7,9 +7,9 @@ interface IPageProps {
 
 const Homepage: NextPage<IPageProps> = ({}) => {
   return (
-    <main>
+    <>
       <h1 className="text-3xl font-bold underline">Next.JS v13</h1>
-    </main>
+    </>
   )
 }
 
