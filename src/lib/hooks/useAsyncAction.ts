@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useTransition } from "react"
 
 import { IServerActionResult } from "@/types"
 
@@ -18,6 +18,7 @@ export const useAsyncAction = <A>({
   initialState = {},
 }: IHookProps<A>) => {
   const [status, setStatus] = useState(() => initialState)
+  const [isPending, startTransition] = useTransition()
 
   const handleAsync = async (param: A) => {
     setStatus({ loading: true })
@@ -25,5 +26,15 @@ export const useAsyncAction = <A>({
     setStatus(response)
   }
 
-  return { handleAsync, status }
+  const handleAsyncTransition = (param: A) => {
+    startTransition(() => {
+      handleAsync(param)
+    })
+  }
+
+  return {
+    handleAsync,
+    handleAsyncTransition,
+    status: { ...status, loading: status.loading || isPending },
+  }
 }

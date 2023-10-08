@@ -1,4 +1,4 @@
-import { useState, useCallback, FormEvent } from "react"
+import { useState, useCallback, FormEvent, useRef } from "react"
 
 import { IServerActionResult } from "@/types"
 
@@ -13,8 +13,12 @@ interface IHookProps {
   initialState?: IState
 }
 
-const useFormData = ({ serverAction, initialState = {} }: IHookProps) => {
+export const useFormData = ({
+  serverAction,
+  initialState = {},
+}: IHookProps) => {
   const [status, setStatus] = useState(() => initialState)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -25,11 +29,10 @@ const useFormData = ({ serverAction, initialState = {} }: IHookProps) => {
       const response = await serverAction(formData)
 
       setStatus(response)
+      formRef.current && formRef.current.reset()
     },
     [serverAction],
   )
 
-  return { status, handleSubmit }
+  return { status, handleSubmit, formRef }
 }
-
-export default useFormData

@@ -29,10 +29,10 @@ const Todo = ({ todo }: IProps): JSX.Element => {
           {completed ? "completed" : "in progress..."}
         </span>
       </p>
-      <p>{content}</p>
+      <p className={completed ? "line-through text-gray-600" : ""}>{content}</p>
       <div className="flex justify-between gap-2">
         <button
-          onClick={() => toggleAction.handleAsync(id)}
+          onClick={() => toggleAction.handleAsyncTransition(id)}
           className={`px-1 text-white font-bold rounded text-sm ${
             !completed
               ? " bg-green-600 hover:bg-green-700"

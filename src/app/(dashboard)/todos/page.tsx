@@ -1,6 +1,6 @@
-import { db } from "@/lib/db"
-import { ITodo } from "@/types"
 import TodoList from "@/components/TodoList"
+import { ITodo } from "@/types"
+import { db } from "@/lib/db"
 
 const getTodos = async (): Promise<[ITodo[], null] | [null, string]> => {
   try {
