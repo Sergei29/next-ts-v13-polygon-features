@@ -13,5 +13,10 @@ export interface IParentProps {
 }
 
 export interface ITodo {
-  [x: string]: any
+  id: string
+  createdAt: Date
+  completed: boolean
+  content: string
 }
+
+export type IServerActionResult = { message: "ok" } | { error: string }
