@@ -2,6 +2,10 @@
 
 https://scottmoss.notion.site/scottmoss/Intro-to-Next-js-V3-6cefbdba58d94e3897dcb8d7e7fc0337
 
+## Build script in production
+
+https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/vercel-caching-issue#vercel-uis-build-script-field
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
